@@ -1,0 +1,743 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2025-11-15",
+  "hooks": [
+    {
+      "id": "security-guard-pretooluse",
+      "name": "Security Guard",
+      "description": "Blocks dangerous commands and protects sensitive files from accidental access or deletion.",
+      "longDescription": "A comprehensive security hook that validates all tool operations before execution. Prevents destructive commands like `rm -rf /`, blocks access to `.env` files, and logs all operations for audit trails.",
+      "repository": {
+        "url": "https://github.com/disler/claude-code-hooks-mastery",
+        "owner": "disler",
+        "name": "claude-code-hooks-mastery",
+        "stars": 1796,
+        "lastUpdated": "2025-11-10"
+      },
+      "author": {
+        "name": "David Disler",
+        "githubUsername": "disler"
+      },
+      "eventType": "PreToolUse",
+      "category": "Security",
+      "tags": ["security", "validation", "safety", "permissions"],
+      "language": "Python",
+      "canBlock": true,
+      "complexity": "intermediate",
+      "installationPath": ".claude/hooks/pre_tool_use.py",
+      "dependencies": ["uv"],
+      "requiresConfiguration": true,
+      "configurationExample": "{\n  \"hooks\": {\n    \"PreToolUse\": [{\n      \"name\": \"security-guard\",\n      \"matcher\": \"Bash|Write|Edit\",\n      \"type\": \"command\",\n      \"command\": \".claude/hooks/pre_tool_use.py\"\n    }]\n  }\n}",
+      "useCases": [
+        "Prevent accidental file deletion",
+        "Protect environment variables and secrets",
+        "Block dangerous shell commands",
+        "Audit trail for security compliance"
+      ],
+      "installTime": 5,
+      "requiresApiKey": false,
+      "externalServices": [],
+      "supports": ["All languages"]
+    },
+    {
+      "id": "tdd-guard",
+      "name": "TDD Guard",
+      "description": "Enforces test-driven development by ensuring tests exist and pass before code changes.",
+      "longDescription": "Comprehensive TDD enforcement hook that supports multiple languages. Checks for test files, runs tests automatically, and blocks operations if tests fail. Supports Python, JavaScript, TypeScript, Go, and more.",
+      "repository": {
+        "url": "https://github.com/nizos/tdd-guard",
+        "owner": "nizos",
+        "name": "tdd-guard",
+        "stars": 342,
+        "lastUpdated": "2025-11-08"
+      },
+      "author": {
+        "name": "Nizar",
+        "githubUsername": "nizos"
+      },
+      "eventType": "PreToolUse",
+      "category": "TDD",
+      "tags": ["testing", "tdd", "quality", "automation"],
+      "language": "Python",
+      "canBlock": true,
+      "complexity": "intermediate",
+      "installationPath": ".claude/hooks/tdd_guard.py",
+      "dependencies": ["pytest", "uv"],
+      "requiresConfiguration": true,
+      "configurationExample": "{\n  \"hooks\": {\n    \"PreToolUse\": [{\n      \"name\": \"tdd-guard\",\n      \"matcher\": \"Write|Edit\",\n      \"type\": \"command\",\n      \"command\": \".claude/hooks/tdd_guard.py\"\n    }]\n  }\n}",
+      "useCases": [
+        "Enforce test-first development",
+        "Prevent untested code from being committed",
+        "Maintain high test coverage",
+        "Multi-language TDD support"
+      ],
+      "installTime": 10,
+      "requiresApiKey": false,
+      "externalServices": [],
+      "supports": ["Python", "JavaScript", "TypeScript", "Go", "Ruby"]
+    },
+    {
+      "id": "skill-auto-activation",
+      "name": "Skill Auto-Activation",
+      "description": "Analyzes user prompts and automatically suggests relevant Claude Code skills.",
+      "longDescription": "Intelligent skill suggestion system that analyzes your prompts using AI to recommend the most relevant skills. Helps you discover and use the right skills at the right time.",
+      "repository": {
+        "url": "https://github.com/disler/claude-code-hooks-mastery",
+        "owner": "disler",
+        "name": "claude-code-hooks-mastery",
+        "stars": 1796,
+        "lastUpdated": "2025-11-10"
+      },
+      "author": {
+        "name": "David Disler",
+        "githubUsername": "disler"
+      },
+      "eventType": "UserPromptSubmit",
+      "category": "Context",
+      "tags": ["skills", "automation", "ai", "productivity"],
+      "language": "Shell",
+      "canBlock": false,
+      "complexity": "beginner",
+      "installationPath": ".claude/hooks/skill_activation.sh",
+      "dependencies": [],
+      "requiresConfiguration": true,
+      "configurationExample": "{\n  \"hooks\": {\n    \"UserPromptSubmit\": [{\n      \"name\": \"skill-activation\",\n      \"type\": \"command\",\n      \"command\": \".claude/hooks/skill_activation.sh\"\n    }]\n  }\n}",
+      "useCases": [
+        "Discover relevant skills automatically",
+        "Improve workflow efficiency",
+        "Learn about available skills",
+        "Context-aware skill recommendations"
+      ],
+      "installTime": 3,
+      "requiresApiKey": true,
+      "externalServices": ["Anthropic API"],
+      "supports": ["All languages"]
+    },
+    {
+      "id": "post-tool-logger",
+      "name": "Post-Tool Logger",
+      "description": "Comprehensive logging of all tool operations for debugging and audit purposes.",
+      "longDescription": "Advanced logging hook that captures detailed information about every tool operation. Includes timestamps, parameters, results, and execution time. Perfect for debugging and compliance.",
+      "repository": {
+        "url": "https://github.com/disler/claude-code-hooks-mastery",
+        "owner": "disler",
+        "name": "claude-code-hooks-mastery",
+        "stars": 1796,
+        "lastUpdated": "2025-11-10"
+      },
+      "author": {
+        "name": "David Disler",
+        "githubUsername": "disler"
+      },
+      "eventType": "PostToolUse",
+      "category": "Monitoring",
+      "tags": ["logging", "debugging", "audit", "monitoring"],
+      "language": "Python",
+      "canBlock": false,
+      "complexity": "beginner",
+      "installationPath": ".claude/hooks/post_tool_logger.py",
+      "dependencies": [],
+      "requiresConfiguration": false,
+      "useCases": [
+        "Debug tool execution issues",
+        "Audit trail for compliance",
+        "Performance monitoring",
+        "Track tool usage patterns"
+      ],
+      "installTime": 3,
+      "requiresApiKey": false,
+      "externalServices": [],
+      "supports": ["All languages"]
+    },
+    {
+      "id": "transcript-converter",
+      "name": "Transcript Converter",
+      "description": "Converts Claude Code sessions to markdown format for documentation and sharing.",
+      "longDescription": "Automatically converts your coding sessions with Claude into well-formatted markdown documents. Great for creating tutorials, documentation, or sharing your workflow with team members.",
+      "repository": {
+        "url": "https://github.com/disler/claude-code-hooks-mastery",
+        "owner": "disler",
+        "name": "claude-code-hooks-mastery",
+        "stars": 1796,
+        "lastUpdated": "2025-11-10"
+      },
+      "author": {
+        "name": "David Disler",
+        "githubUsername": "disler"
+      },
+      "eventType": "PostToolUse",
+      "category": "Documentation",
+      "tags": ["documentation", "markdown", "export", "sharing"],
+      "language": "Python",
+      "canBlock": false,
+      "complexity": "intermediate",
+      "installationPath": ".claude/hooks/transcript_converter.py",
+      "dependencies": [],
+      "requiresConfiguration": true,
+      "configurationExample": "{\n  \"hooks\": {\n    \"PostToolUse\": [{\n      \"name\": \"transcript-converter\",\n      \"type\": \"command\",\n      \"command\": \".claude/hooks/transcript_converter.py\"\n    }]\n  }\n}",
+      "useCases": [
+        "Create session documentation",
+        "Share workflows with team",
+        "Build tutorials from sessions",
+        "Archive important conversations"
+      ],
+      "installTime": 5,
+      "requiresApiKey": false,
+      "externalServices": [],
+      "supports": ["All languages"]
+    },
+    {
+      "id": "sensitive-file-protector",
+      "name": "Sensitive File Protector",
+      "description": "Blocks access to sensitive files like .env, credentials, and private keys.",
+      "longDescription": "Security-focused hook that maintains a blacklist of sensitive file patterns and prevents Claude Code from reading, writing, or modifying them. Protects your secrets and credentials.",
+      "repository": {
+        "url": "https://github.com/disler/claude-code-hooks-mastery",
+        "owner": "disler",
+        "name": "claude-code-hooks-mastery",
+        "stars": 1796,
+        "lastUpdated": "2025-11-10"
+      },
+      "author": {
+        "name": "David Disler",
+        "githubUsername": "disler"
+      },
+      "eventType": "PreToolUse",
+      "category": "Security",
+      "tags": ["security", "secrets", "credentials", "privacy"],
+      "language": "Python",
+      "canBlock": true,
+      "complexity": "beginner",
+      "installationPath": ".claude/hooks/sensitive_files.py",
+      "dependencies": [],
+      "requiresConfiguration": true,
+      "configurationExample": "{\n  \"hooks\": {\n    \"PreToolUse\": [{\n      \"name\": \"sensitive-file-protector\",\n      \"matcher\": \"Read|Write|Edit\",\n      \"type\": \"command\",\n      \"command\": \".claude/hooks/sensitive_files.py\"\n    }]\n  }\n}",
+      "useCases": [
+        "Protect environment variables",
+        "Prevent credential exposure",
+        "Block access to SSH keys",
+        "Secure sensitive configuration"
+      ],
+      "installTime": 3,
+      "requiresApiKey": false,
+      "externalServices": [],
+      "supports": ["All languages"]
+    },
+    {
+      "id": "type-checker-stop",
+      "name": "Type Checker",
+      "description": "Runs TypeScript type checking before session completion to catch type errors.",
+      "longDescription": "Ensures type safety by running tsc --noEmit before allowing sessions to complete. Catches type errors early and maintains code quality in TypeScript projects.",
+      "repository": {
+        "url": "https://github.com/diet103/claude-code-infrastructure-showcase",
+        "owner": "diet103",
+        "name": "claude-code-infrastructure-showcase",
+        "stars": 156,
+        "lastUpdated": "2025-11-05"
+      },
+      "author": {
+        "name": "Dietrich",
+        "githubUsername": "diet103"
+      },
+      "eventType": "Stop",
+      "category": "Quality",
+      "tags": ["typescript", "type-checking", "quality", "validation"],
+      "language": "Shell",
+      "canBlock": true,
+      "complexity": "beginner",
+      "installationPath": ".claude/hooks/type_check.sh",
+      "dependencies": ["typescript"],
+      "requiresConfiguration": true,
+      "configurationExample": "{\n  \"hooks\": {\n    \"Stop\": [{\n      \"name\": \"type-checker\",\n      \"type\": \"command\",\n      \"command\": \".claude/hooks/type_check.sh\"\n    }]\n  }\n}",
+      "useCases": [
+        "Enforce type safety",
+        "Catch type errors early",
+        "Maintain TypeScript quality",
+        "Prevent broken builds"
+      ],
+      "installTime": 2,
+      "requiresApiKey": false,
+      "externalServices": [],
+      "supports": ["TypeScript"]
+    },
+    {
+      "id": "eslint-runner",
+      "name": "ESLint Runner",
+      "description": "Enforces code style and quality by running ESLint before session completion.",
+      "longDescription": "Automatically runs ESLint on your codebase before allowing sessions to end. Ensures consistent code style and catches common errors. Configurable to match your project's rules.",
+      "repository": {
+        "url": "https://github.com/diet103/claude-code-infrastructure-showcase",
+        "owner": "diet103",
+        "name": "claude-code-infrastructure-showcase",
+        "stars": 156,
+        "lastUpdated": "2025-11-05"
+      },
+      "author": {
+        "name": "Dietrich",
+        "githubUsername": "diet103"
+      },
+      "eventType": "Stop",
+      "category": "Quality",
+      "tags": ["linting", "code-style", "quality", "eslint"],
+      "language": "Shell",
+      "canBlock": true,
+      "complexity": "beginner",
+      "installationPath": ".claude/hooks/eslint.sh",
+      "dependencies": ["eslint"],
+      "requiresConfiguration": true,
+      "configurationExample": "{\n  \"hooks\": {\n    \"Stop\": [{\n      \"name\": \"eslint-runner\",\n      \"type\": \"command\",\n      \"command\": \".claude/hooks/eslint.sh\"\n    }]\n  }\n}",
+      "useCases": [
+        "Enforce code style",
+        "Catch common errors",
+        "Maintain consistency",
+        "Automate code review"
+      ],
+      "installTime": 2,
+      "requiresApiKey": false,
+      "externalServices": [],
+      "supports": ["JavaScript", "TypeScript"]
+    },
+    {
+      "id": "auto-committer",
+      "name": "Auto-Committer",
+      "description": "Automatically creates git commits when sessions end successfully.",
+      "longDescription": "Smart git automation that creates meaningful commits based on the changes made during your Claude Code session. Includes AI-generated commit messages and automatic staging.",
+      "repository": {
+        "url": "https://github.com/carlrannaberg/claudekit",
+        "owner": "carlrannaberg",
+        "name": "claudekit",
+        "stars": 89,
+        "lastUpdated": "2025-11-07"
+      },
+      "author": {
+        "name": "Carl Rannaberg",
+        "githubUsername": "carlrannaberg"
+      },
+      "eventType": "Stop",
+      "category": "Automation",
+      "tags": ["git", "automation", "commits", "version-control"],
+      "language": "Shell",
+      "canBlock": false,
+      "complexity": "intermediate",
+      "installationPath": ".claude/hooks/auto_commit.sh",
+      "dependencies": ["git"],
+      "requiresConfiguration": true,
+      "configurationExample": "{\n  \"hooks\": {\n    \"Stop\": [{\n      \"name\": \"auto-committer\",\n      \"type\": \"command\",\n      \"command\": \".claude/hooks/auto_commit.sh\"\n    }]\n  }\n}",
+      "useCases": [
+        "Automate git workflow",
+        "Never forget to commit",
+        "Generate commit messages",
+        "Track session changes"
+      ],
+      "installTime": 4,
+      "requiresApiKey": false,
+      "externalServices": [],
+      "supports": ["All languages"]
+    },
+    {
+      "id": "codebase-map-updater",
+      "name": "Codebase Map Updater",
+      "description": "Incrementally updates project context map as files are modified.",
+      "longDescription": "Maintains an up-to-date map of your codebase structure and relationships. Updates incrementally as you make changes, providing Claude with better context for future operations.",
+      "repository": {
+        "url": "https://github.com/peterkrueck/Claude-Code-Development-Kit",
+        "owner": "peterkrueck",
+        "name": "Claude-Code-Development-Kit",
+        "stars": 234,
+        "lastUpdated": "2025-11-09"
+      },
+      "author": {
+        "name": "Peter Krueck",
+        "githubUsername": "peterkrueck"
+      },
+      "eventType": "PostToolUse",
+      "category": "Context",
+      "tags": ["context", "mapping", "documentation", "automation"],
+      "language": "TypeScript",
+      "canBlock": false,
+      "complexity": "advanced",
+      "installationPath": ".claude/hooks/codebase_map.ts",
+      "dependencies": ["node", "typescript"],
+      "requiresConfiguration": true,
+      "configurationExample": "{\n  \"hooks\": {\n    \"PostToolUse\": [{\n      \"name\": \"codebase-map\",\n      \"matcher\": \"Write|Edit\",\n      \"type\": \"command\",\n      \"command\": \"node .claude/hooks/codebase_map.ts\"\n    }]\n  }\n}",
+      "useCases": [
+        "Maintain project context",
+        "Improve Claude's understanding",
+        "Track codebase structure",
+        "Document relationships"
+      ],
+      "installTime": 15,
+      "requiresApiKey": false,
+      "externalServices": [],
+      "supports": ["All languages"]
+    },
+    {
+      "id": "session-manager",
+      "name": "Session Manager",
+      "description": "Initializes session state and loads project-specific configuration.",
+      "longDescription": "Runs at the start of each session to set up the environment, load project-specific rules, and configure Claude Code for your specific project needs.",
+      "repository": {
+        "url": "https://github.com/peterkrueck/Claude-Code-Development-Kit",
+        "owner": "peterkrueck",
+        "name": "Claude-Code-Development-Kit",
+        "stars": 234,
+        "lastUpdated": "2025-11-09"
+      },
+      "author": {
+        "name": "Peter Krueck",
+        "githubUsername": "peterkrueck"
+      },
+      "eventType": "SessionStart",
+      "category": "Context",
+      "tags": ["initialization", "configuration", "session", "setup"],
+      "language": "Python",
+      "canBlock": false,
+      "complexity": "intermediate",
+      "installationPath": ".claude/hooks/session_init.py",
+      "dependencies": [],
+      "requiresConfiguration": true,
+      "configurationExample": "{\n  \"hooks\": {\n    \"SessionStart\": [{\n      \"name\": \"session-manager\",\n      \"type\": \"command\",\n      \"command\": \".claude/hooks/session_init.py\"\n    }]\n  }\n}",
+      "useCases": [
+        "Load project configuration",
+        "Initialize session state",
+        "Set up environment",
+        "Apply project-specific rules"
+      ],
+      "installTime": 5,
+      "requiresApiKey": false,
+      "externalServices": [],
+      "supports": ["All languages"]
+    },
+    {
+      "id": "performance-profiler",
+      "name": "Performance Profiler",
+      "description": "Tracks and logs execution time of all tool operations.",
+      "longDescription": "Monitors the performance of Claude Code operations by tracking execution times. Helps identify slow operations and optimize your workflow.",
+      "repository": {
+        "url": "https://github.com/disler/claude-code-hooks-mastery",
+        "owner": "disler",
+        "name": "claude-code-hooks-mastery",
+        "stars": 1796,
+        "lastUpdated": "2025-11-10"
+      },
+      "author": {
+        "name": "David Disler",
+        "githubUsername": "disler"
+      },
+      "eventType": "PostToolUse",
+      "category": "Monitoring",
+      "tags": ["performance", "profiling", "monitoring", "optimization"],
+      "language": "Python",
+      "canBlock": false,
+      "complexity": "intermediate",
+      "installationPath": ".claude/hooks/profiler.py",
+      "dependencies": [],
+      "requiresConfiguration": false,
+      "useCases": [
+        "Monitor operation performance",
+        "Identify slow operations",
+        "Optimize workflow",
+        "Track execution times"
+      ],
+      "installTime": 4,
+      "requiresApiKey": false,
+      "externalServices": [],
+      "supports": ["All languages"]
+    },
+    {
+      "id": "change-tracker",
+      "name": "Change Tracker",
+      "description": "Monitors and logs all file modifications during the session.",
+      "longDescription": "Comprehensive change tracking that records every file modification, creation, and deletion. Provides a detailed audit trail of all changes made during your Claude Code sessions.",
+      "repository": {
+        "url": "https://github.com/disler/claude-code-hooks-mastery",
+        "owner": "disler",
+        "name": "claude-code-hooks-mastery",
+        "stars": 1796,
+        "lastUpdated": "2025-11-10"
+      },
+      "author": {
+        "name": "David Disler",
+        "githubUsername": "disler"
+      },
+      "eventType": "PostToolUse",
+      "category": "Monitoring",
+      "tags": ["tracking", "monitoring", "audit", "changes"],
+      "language": "Python",
+      "canBlock": false,
+      "complexity": "beginner",
+      "installationPath": ".claude/hooks/change_tracker.py",
+      "dependencies": [],
+      "requiresConfiguration": false,
+      "useCases": [
+        "Track file changes",
+        "Audit modifications",
+        "Monitor session activity",
+        "Generate change reports"
+      ],
+      "installTime": 3,
+      "requiresApiKey": false,
+      "externalServices": [],
+      "supports": ["All languages"]
+    },
+    {
+      "id": "code-review-trigger",
+      "name": "Code Review Trigger",
+      "description": "Suggests code review when session ends with significant changes.",
+      "longDescription": "Intelligent hook that analyzes the changes made during your session and suggests when a code review would be beneficial. Helps maintain code quality through peer review.",
+      "repository": {
+        "url": "https://github.com/diet103/claude-code-infrastructure-showcase",
+        "owner": "diet103",
+        "name": "claude-code-infrastructure-showcase",
+        "stars": 156,
+        "lastUpdated": "2025-11-05"
+      },
+      "author": {
+        "name": "Dietrich",
+        "githubUsername": "diet103"
+      },
+      "eventType": "Stop",
+      "category": "Quality",
+      "tags": ["code-review", "quality", "collaboration", "best-practices"],
+      "language": "Shell",
+      "canBlock": false,
+      "complexity": "intermediate",
+      "installationPath": ".claude/hooks/review_trigger.sh",
+      "dependencies": [],
+      "requiresConfiguration": true,
+      "configurationExample": "{\n  \"hooks\": {\n    \"Stop\": [{\n      \"name\": \"review-trigger\",\n      \"type\": \"command\",\n      \"command\": \".claude/hooks/review_trigger.sh\"\n    }]\n  }\n}",
+      "useCases": [
+        "Prompt for code reviews",
+        "Maintain code quality",
+        "Encourage collaboration",
+        "Identify review-worthy changes"
+      ],
+      "installTime": 3,
+      "requiresApiKey": false,
+      "externalServices": [],
+      "supports": ["All languages"]
+    },
+    {
+      "id": "readme-generator",
+      "name": "README Generator",
+      "description": "Automatically generates or updates README documentation based on code changes.",
+      "longDescription": "Smart documentation generator that creates and maintains README files by analyzing your code. Keeps documentation in sync with your codebase automatically.",
+      "repository": {
+        "url": "https://github.com/peterkrueck/Claude-Code-Development-Kit",
+        "owner": "peterkrueck",
+        "name": "Claude-Code-Development-Kit",
+        "stars": 234,
+        "lastUpdated": "2025-11-09"
+      },
+      "author": {
+        "name": "Peter Krueck",
+        "githubUsername": "peterkrueck"
+      },
+      "eventType": "Stop",
+      "category": "Documentation",
+      "tags": ["documentation", "readme", "automation", "markdown"],
+      "language": "TypeScript",
+      "canBlock": false,
+      "complexity": "advanced",
+      "installationPath": ".claude/hooks/readme_gen.ts",
+      "dependencies": ["node", "typescript"],
+      "requiresConfiguration": true,
+      "configurationExample": "{\n  \"hooks\": {\n    \"Stop\": [{\n      \"name\": \"readme-generator\",\n      \"type\": \"command\",\n      \"command\": \"node .claude/hooks/readme_gen.ts\"\n    }]\n  }\n}",
+      "useCases": [
+        "Generate documentation automatically",
+        "Keep README up-to-date",
+        "Document new features",
+        "Maintain project documentation"
+      ],
+      "installTime": 10,
+      "requiresApiKey": true,
+      "externalServices": ["Anthropic API"],
+      "supports": ["All languages"]
+    },
+    {
+      "id": "test-runner",
+      "name": "Test Runner",
+      "description": "Runs your test suite before session completion to ensure quality.",
+      "longDescription": "Automatically executes your project's test suite before allowing sessions to end. Supports multiple testing frameworks and provides detailed failure reports.",
+      "repository": {
+        "url": "https://github.com/nizos/tdd-guard",
+        "owner": "nizos",
+        "name": "tdd-guard",
+        "stars": 342,
+        "lastUpdated": "2025-11-08"
+      },
+      "author": {
+        "name": "Nizar",
+        "githubUsername": "nizos"
+      },
+      "eventType": "Stop",
+      "category": "Quality",
+      "tags": ["testing", "quality", "automation", "validation"],
+      "language": "Shell",
+      "canBlock": true,
+      "complexity": "beginner",
+      "installationPath": ".claude/hooks/test_runner.sh",
+      "dependencies": [],
+      "requiresConfiguration": true,
+      "configurationExample": "{\n  \"hooks\": {\n    \"Stop\": [{\n      \"name\": \"test-runner\",\n      \"type\": \"command\",\n      \"command\": \".claude/hooks/test_runner.sh\"\n    }]\n  }\n}",
+      "useCases": [
+        "Ensure tests pass before completion",
+        "Catch regressions early",
+        "Maintain code quality",
+        "Automate testing workflow"
+      ],
+      "installTime": 3,
+      "requiresApiKey": false,
+      "externalServices": [],
+      "supports": ["JavaScript", "TypeScript", "Python", "Go", "Ruby"]
+    },
+    {
+      "id": "build-validator",
+      "name": "Build Validator",
+      "description": "Ensures your project builds successfully before session ends.",
+      "longDescription": "Runs your project's build command before allowing sessions to complete. Catches build errors early and ensures your codebase is always in a buildable state.",
+      "repository": {
+        "url": "https://github.com/diet103/claude-code-infrastructure-showcase",
+        "owner": "diet103",
+        "name": "claude-code-infrastructure-showcase",
+        "stars": 156,
+        "lastUpdated": "2025-11-05"
+      },
+      "author": {
+        "name": "Dietrich",
+        "githubUsername": "diet103"
+      },
+      "eventType": "Stop",
+      "category": "Quality",
+      "tags": ["build", "validation", "quality", "automation"],
+      "language": "Shell",
+      "canBlock": true,
+      "complexity": "beginner",
+      "installationPath": ".claude/hooks/build_check.sh",
+      "dependencies": [],
+      "requiresConfiguration": true,
+      "configurationExample": "{\n  \"hooks\": {\n    \"Stop\": [{\n      \"name\": \"build-validator\",\n      \"type\": \"command\",\n      \"command\": \".claude/hooks/build_check.sh\"\n    }]\n  }\n}",
+      "useCases": [
+        "Prevent broken builds",
+        "Catch build errors early",
+        "Ensure buildable state",
+        "Automate build checks"
+      ],
+      "installTime": 3,
+      "requiresApiKey": false,
+      "externalServices": [],
+      "supports": ["All languages"]
+    },
+    {
+      "id": "api-doc-updater",
+      "name": "API Doc Updater",
+      "description": "Updates API documentation when code changes affect public interfaces.",
+      "longDescription": "Intelligently updates API documentation by detecting changes to public interfaces. Keeps your API docs in sync with your code automatically using JSDoc, TypeDoc, or similar tools.",
+      "repository": {
+        "url": "https://github.com/peterkrueck/Claude-Code-Development-Kit",
+        "owner": "peterkrueck",
+        "name": "Claude-Code-Development-Kit",
+        "stars": 234,
+        "lastUpdated": "2025-11-09"
+      },
+      "author": {
+        "name": "Peter Krueck",
+        "githubUsername": "peterkrueck"
+      },
+      "eventType": "PostToolUse",
+      "category": "Documentation",
+      "tags": ["documentation", "api", "automation", "interfaces"],
+      "language": "TypeScript",
+      "canBlock": false,
+      "complexity": "advanced",
+      "installationPath": ".claude/hooks/api_docs.ts",
+      "dependencies": ["node", "typescript"],
+      "requiresConfiguration": true,
+      "configurationExample": "{\n  \"hooks\": {\n    \"PostToolUse\": [{\n      \"name\": \"api-doc-updater\",\n      \"matcher\": \"Write|Edit\",\n      \"type\": \"command\",\n      \"command\": \"node .claude/hooks/api_docs.ts\"\n    }]\n  }\n}",
+      "useCases": [
+        "Keep API docs current",
+        "Document interface changes",
+        "Automate documentation updates",
+        "Maintain documentation quality"
+      ],
+      "installTime": 12,
+      "requiresApiKey": false,
+      "externalServices": [],
+      "supports": ["TypeScript", "JavaScript"]
+    },
+    {
+      "id": "context-injector",
+      "name": "Project Context Injector",
+      "description": "Automatically adds relevant project context to your prompts.",
+      "longDescription": "Enhances your prompts by automatically injecting relevant project context, coding standards, and architectural guidelines. Helps Claude better understand your project's specific needs.",
+      "repository": {
+        "url": "https://github.com/carlrannaberg/claudekit",
+        "owner": "carlrannaberg",
+        "name": "claudekit",
+        "stars": 89,
+        "lastUpdated": "2025-11-07"
+      },
+      "author": {
+        "name": "Carl Rannaberg",
+        "githubUsername": "carlrannaberg"
+      },
+      "eventType": "UserPromptSubmit",
+      "category": "Context",
+      "tags": ["context", "prompts", "automation", "enhancement"],
+      "language": "Python",
+      "canBlock": false,
+      "complexity": "intermediate",
+      "installationPath": ".claude/hooks/context_inject.py",
+      "dependencies": [],
+      "requiresConfiguration": true,
+      "configurationExample": "{\n  \"hooks\": {\n    \"UserPromptSubmit\": [{\n      \"name\": \"context-injector\",\n      \"type\": \"command\",\n      \"command\": \".claude/hooks/context_inject.py\"\n    }]\n  }\n}",
+      "useCases": [
+        "Enhance prompt context",
+        "Apply coding standards",
+        "Improve Claude's understanding",
+        "Maintain project consistency"
+      ],
+      "installTime": 7,
+      "requiresApiKey": false,
+      "externalServices": [],
+      "supports": ["All languages"]
+    },
+    {
+      "id": "notification-bell",
+      "name": "Notification Bell",
+      "description": "Provides audio feedback for important Claude Code events.",
+      "longDescription": "Plays customizable audio notifications for different Claude Code events. Helps you stay aware of important operations, especially during long-running tasks.",
+      "repository": {
+        "url": "https://github.com/carlrannaberg/claudekit",
+        "owner": "carlrannaberg",
+        "name": "claudekit",
+        "stars": 89,
+        "lastUpdated": "2025-11-07"
+      },
+      "author": {
+        "name": "Carl Rannaberg",
+        "githubUsername": "carlrannaberg"
+      },
+      "eventType": "Notification",
+      "category": "Monitoring",
+      "tags": ["notifications", "audio", "feedback", "alerts"],
+      "language": "Python",
+      "canBlock": false,
+      "complexity": "beginner",
+      "installationPath": ".claude/hooks/notify.py",
+      "dependencies": [],
+      "requiresConfiguration": true,
+      "configurationExample": "{\n  \"hooks\": {\n    \"Notification\": [{\n      \"name\": \"notification-bell\",\n      \"type\": \"command\",\n      \"command\": \".claude/hooks/notify.py\"\n    }]\n  }\n}",
+      "useCases": [
+        "Audio feedback for events",
+        "Stay informed of operations",
+        "Alert on important events",
+        "Improve workflow awareness"
+      ],
+      "installTime": 4,
+      "requiresApiKey": false,
+      "externalServices": [],
+      "supports": ["All languages"]
+    }
+  ]
+}
